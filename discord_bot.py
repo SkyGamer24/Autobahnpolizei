@@ -481,7 +481,7 @@ async def on_message(message):
 
 
 #INFO COMMAND
-    if message.content.startswith('!info'):
+    if message.content.startswith('!info') and modrolle in message.autor.roles:
         
         with open(("warningcount.json"), "w") as warning_count_file:
             warning_count_file.write(json.dumps(warnings))
@@ -535,7 +535,7 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
 
-    if message.content.startswith('!unmute'):
+    if message.content.startswith('!unmute') and modrolle in message.autor.roles:
         try:
             mention = message.content.split(' ')[1]
         except:
