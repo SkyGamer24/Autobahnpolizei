@@ -538,19 +538,15 @@ async def on_message(message):
     if message.content.startswith('!unmute') and modrolle in message.autor.roles:
         try:
             mention = message.content.split(' ')[1]
+            tester = True
         except:
             await message.channel.send('Um einen User zu entmuten musst du !unmute [user] schreiben')
             return
         tester = False
-        try:
-            reason = message.content.split('> ') [1]
-            tester = True
-        except:
-            await message.channel.send('Um einen User zu entmuten musst du !unmute [user] schreiben')
+
         if tester:
             mention = message.content.split(' ')[1]
             try:
-                reason = mention.split('> ') [1]
                 mention = mention.split('> ') [0]
                 mention = mention.replace('!', '')
                 autor1 = mention.replace('<', '')
@@ -564,6 +560,44 @@ async def on_message(message):
             member = guild.get_member(author_id)
             await member.remove_roles(mutedrole)
             unmutembed = discord.Embed(description=f'Der User <@{author_id}> wurde erfolgreich entmutet.', colour=farbton)
+            await message.channel.send(embed=unmutembed)
+            
+            
+    if message.content.startswith('!dm') and modrolle in message.author.roles:
+        
+
+        try:
+            mention = message.content.split(' ')[1]
+        except:
+            await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
+            return
+        tester = False
+        try:
+            reason = message.content.split('> ') [1]
+            tester = True
+        except:
+            await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
+        if tester:
+            mention = message.content.split(' ')[1]
+            try:
+                mention = mention.split('> ') [0]
+                mention = mention.replace('!', '')
+                autor1 = mention.replace('<', '')
+                autor2 = autor1.replace('>', '')
+                autor3 = autor2.replace('!', '')
+                autor4 = autor3.replace('@', '')
+                author_id = int(autor4)
+                
+            except:
+                await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
+    
+                return
+                
+            member = guild.get_member(author_id)
+            
+            dmnachricht = discord.Embed(description=reason, colour=farbton)
+            await member.send(embed = dmnachricht)
+            unmutembed = discord.Embed(description=f'Dem User <@{author_id}> wurde erfolgreich eine DM geschickt.', colur = farbton)
             await message.channel.send(embed=unmutembed)
 
 
@@ -598,7 +632,7 @@ async def on_message_edit(before, after):
 
     if before.content != after.content:
         farbton3 = random.choice([Farbe, Farbe1, Farbe2, Farbe3, Farbe3, Farbe5, Farbe6, Farbe7, Farbe8, Farbe9, Farbe10, Farbe11, Farbe12])
-        editiert = discord.Embed(description =  '**Nachricht Gelöscht**', colour = farbton3)
+        editiert = discord.Embed(description =  '**Nachricht Editiert**', colour = farbton3)
         editiert.add_field(name='__User:__', value=f'        <@{str(before.author.id)}>', inline = True)
         editiert.add_field(name = '__Channel:__', value=f'       <#{str(before.channel.id)}>', inline = True)
         editiert.add_field(name = '__Vorher:__', value=f'       {str(before.content)}', inline = False)
@@ -612,7 +646,41 @@ async def on_member_join(member):
     logging = client.get_channel(728901938586058823)
     joinembed = discord.Embed(description = f'{member.mention} ist dem Server beigetreten.', colour = farbton4)
     await logging.send(embed=joinembed)
+    
+    welcome = discord.Embed(title=''':flag_de: German:
 
+    Herzlich Willkommen,''', description = '''
+    am offiziellen Discord-Server von Z-Software und Aerosoft rund um den Autobahn-Polizei Simulator 3.
+    Bitte mach dich zum Beginn mit unseren Regeln <#681876950809444371> vertraut.
+    Außerdem solltest du einen Blick in <#723611371660378173> werfen.
+    Dort findest du alle interessanten Informationen, Fragen und Antworten, sowie wissenswerte Details rund um den 3. Teil der Polizei-Simulation.
+    Somit  werden dir bereits am Anfang viele deiner Fragen beantwortet.
+
+    Nun aber genug der Worte und viel Spaß am Server!
+
+    Dein Entwicklungs-Team
+
+''', colour = 0xFF0000 )
+    englischembed = discord.Embed(title=''':flag_gb: ENGLISH:
+
+    Welcome,''', description='''
+    at the official discord server of Z-Software and Aerosoft around the Autobahn-Police Simulator 3.
+    Please make yourself familiar with our rules <#681876950809444371>.
+    You should also have a look at <#723611371660378173>.
+    There you will find all interesting information, questions and answers, as well as interesting details about the 3rd part of the police simulation.
+    Thus, many of your questions will be answered right at the beginning.
+
+    But now enough words and enjoy the server!
+
+    Your development team
+    ''', colour=0x0404B4)
+    try:
+        await member.send(embed=welcome)
+        await member.send(embed=englischembed)
+    except:
+        pass
+        
+        
 
 @client.event
 async def on_member_remove(member):
@@ -621,5 +689,16 @@ async def on_member_remove(member):
     logging = client.get_channel(728901938586058823)
     leaveembed = discord.Embed(descripion = f'{member} hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
+    goodbye = discord.Embed(title='', description='', colour=farbton3)
+    try:
+        await member.send(embed=goodbye)
+    except:
+        pass
+
+
+
+
+
 
 client.run(TOKEN)
+
