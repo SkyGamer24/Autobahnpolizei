@@ -649,7 +649,7 @@ async def on_member_join(member):
     
     welcome = discord.Embed(title=''':flag_de: German:
 
-    Herzlich Willkommen,''', description = '''
+Herzlich Willkommen,''', description = '''
     am offiziellen Discord-Server von Z-Software und Aerosoft rund um den Autobahn-Polizei Simulator 3.
     Bitte mach dich zum Beginn mit unseren Regeln <#681876950809444371> vertraut.
     Außerdem solltest du einen Blick in <#723611371660378173> werfen.
@@ -663,7 +663,7 @@ async def on_member_join(member):
 ''', colour = 0xFF0000 )
     englischembed = discord.Embed(title=''':flag_gb: ENGLISH:
 
-    Welcome,''', description='''
+Welcome,''', description='''
     at the official discord server of Z-Software and Aerosoft around the Autobahn-Police Simulator 3.
     Please make yourself familiar with our rules <#681876950809444371>.
     You should also have a look at <#723611371660378173>.
@@ -701,4 +701,3 @@ async def on_member_remove(member):
 
 
 client.run(TOKEN)
-
