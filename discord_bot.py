@@ -647,12 +647,12 @@ async def on_member_join(member):
     joinembed = discord.Embed(description = f'{member.mention} ist dem Server beigetreten.', colour = farbton4)
     await logging.send(embed=joinembed)
     
-    welcome = discord.Embed(title=''':flag_de: German:
+    welcome = discord.Embed(title=''':flag_de: __German__:
 
-Herzlich Willkommen,''', description = '''
-    am offiziellen Discord-Server von Z-Software und Aerosoft rund um den Autobahn-Polizei Simulator 3.
-    Bitte mach dich zum Beginn mit unseren Regeln <#681876950809444371> vertraut.
-    Außerdem solltest du einen Blick in <#723611371660378173> werfen.
+    Herzlich Willkommen,''', description = '''
+    am offiziellen Discord-Server von __Z-Software__ und __Aerosoft__ rund um den __Autobahn-Polizei Simulator 3__.
+    Bitte mach dich zum Beginn mit unseren Regeln (<#681876950809444371>) vertraut.
+    Außerdem solltest du einen Blick in (<#723611371660378173>) werfen.
     Dort findest du alle interessanten Informationen, Fragen und Antworten, sowie wissenswerte Details rund um den 3. Teil der Polizei-Simulation.
     Somit  werden dir bereits am Anfang viele deiner Fragen beantwortet.
 
@@ -661,12 +661,12 @@ Herzlich Willkommen,''', description = '''
     Dein Entwicklungs-Team
 
 ''', colour = 0xFF0000 )
-    englischembed = discord.Embed(title=''':flag_gb: ENGLISH:
+    englischembed = discord.Embed(title=''':flag_gb: __English__:
 
-Welcome,''', description='''
-    at the official discord server of Z-Software and Aerosoft around the Autobahn-Police Simulator 3.
-    Please make yourself familiar with our rules <#681876950809444371>.
-    You should also have a look at <#723611371660378173>.
+    Welcome,''', description='''
+    at the official discord server of __Z-Software__ and __Aerosoft__ around the __Autobahn-Police Simulator 3__.
+    Please make yourself familiar with our rules (<#681876950809444371>).
+    You should also have a look at (<#723611371660378173>).
     There you will find all interesting information, questions and answers, as well as interesting details about the 3rd part of the police simulation.
     Thus, many of your questions will be answered right at the beginning.
 
@@ -687,7 +687,7 @@ async def on_member_remove(member):
     member = member.mention
     farbton3 = random.choice([Farbe, Farbe1, Farbe2, Farbe3, Farbe3, Farbe5, Farbe6, Farbe7, Farbe8, Farbe9, Farbe10, Farbe11, Farbe12])
     logging = client.get_channel(728901938586058823)
-    leaveembed = discord.Embed(description = f'{member} hat den Server verlassen.', colour = farbton3)
+    leaveembed = discord.Embed(descripion = f'{member} hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
     goodbye = discord.Embed(title='', description='', colour=farbton3)
     try:
@@ -701,3 +701,4 @@ async def on_member_remove(member):
 
 
 client.run(TOKEN)
+
