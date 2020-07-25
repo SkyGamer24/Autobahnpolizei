@@ -687,7 +687,7 @@ async def on_member_remove(member):
     member = member.mention
     farbton3 = random.choice([Farbe, Farbe1, Farbe2, Farbe3, Farbe3, Farbe5, Farbe6, Farbe7, Farbe8, Farbe9, Farbe10, Farbe11, Farbe12])
     logging = client.get_channel(728901938586058823)
-    leaveembed = discord.Embed(descripion = f'{member} hat den Server verlassen.', colour = farbton3)
+    leaveembed = discord.Embed(description = f'{member} hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
     goodbye = discord.Embed(title='', description='', colour=farbton3)
     try:
