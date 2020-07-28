@@ -642,9 +642,11 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_member_join(member):
+    member = member
+    member = str(member).split('#')[0]
     farbton4 = random.choice([Farbe, Farbe1, Farbe2, Farbe3, Farbe3, Farbe5, Farbe6, Farbe7, Farbe8, Farbe9, Farbe10, Farbe11, Farbe12])
     logging = client.get_channel(728901938586058823)
-    joinembed = discord.Embed(description = f'{member.mention} ist dem Server beigetreten.', colour = farbton4)
+    joinembed = discord.Embed(description = f':DE_ArrowJoin: **{member}** ist dem Server beigetreten.', colour = farbton4)
     await logging.send(embed=joinembed)
     
     welcome = discord.Embed(title=''':flag_de: *__German:__*
@@ -684,10 +686,11 @@ Welcome,''', description='''
 
 @client.event
 async def on_member_remove(member):
-    member = member.mention
+    member = member
+    member = str(member).split('#')[0]
     farbton3 = random.choice([Farbe, Farbe1, Farbe2, Farbe3, Farbe3, Farbe5, Farbe6, Farbe7, Farbe8, Farbe9, Farbe10, Farbe11, Farbe12])
     logging = client.get_channel(728901938586058823)
-    leaveembed = discord.Embed(description = f'{member} hat den Server verlassen.', colour = farbton3)
+    leaveembed = discord.Embed(description = f' **{member}** hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
     goodbye = discord.Embed(title='', description='', colour=farbton3)
     try:
