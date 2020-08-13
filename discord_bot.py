@@ -480,7 +480,7 @@ async def on_message(message):
 
 
 #INFO COMMAND
-    if message.content.startswith('!info') and modrolle in message.autor.roles:
+    if message.content.startswith('!info') and modrolle in message.author.roles:
         
         with open(("warningcount.json"), "w") as warning_count_file:
             warning_count_file.write(json.dumps(warnings))
