@@ -684,11 +684,6 @@ async def on_member_remove(member):
     logging = client.get_channel(728901938586058823)
     leaveembed = discord.Embed(description = f' **{member}** hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
-    goodbye = discord.Embed(title='', description='', colour=farbton3)
-    try:
-        await member.send(embed=goodbye)
-    except:
-        pass
 
 
 
