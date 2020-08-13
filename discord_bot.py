@@ -645,7 +645,7 @@ async def on_member_join(member):
     member = str(member1).split('#')[0]
     farbton4 = 0x04B404
     logging = client.get_channel(728901938586058823)
-    joinembed = discord.Embed(description = f':DE_ArrowJoin: **{member}** ist dem Server beigetreten. \n{member1.mention}', colour = farbton4)
+    joinembed = discord.Embed(description = f'**{member}** ist dem Server beigetreten. \n \n{member1.mention}', colour = farbton4)
     await logging.send(embed=joinembed)
     
     welcome = discord.Embed(title=''':flag_de: *__German:__*
@@ -668,12 +668,9 @@ Welcome,''', description='''
     But now enough words and enjoy the server!
     Your development team
     ''', colour=0x0404B4)
-    try:
-        await member.send(embed=welcome)
-        await member.send(embed=englischembed)
-    except:
-        pass
-        
+    
+    await member1.send(embed=welcome)
+    await member1.send(embed=englischembed)
         
 
 @client.event
@@ -682,7 +679,7 @@ async def on_member_remove(member):
     member = str(member).split('#')[0]
     farbton3 = 0xDF0101
     logging = client.get_channel(728901938586058823)
-    leaveembed = discord.Embed(description = f' **{member}** hat den Server verlassen.', colour = farbton3)
+    leaveembed = discord.Embed(description = f'**{member}** hat den Server verlassen.', colour = farbton3)
     await logging.send(embed = leaveembed)
 
 
