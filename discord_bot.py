@@ -69,7 +69,7 @@ async def on_message(message):
         amount = message.content.split(' ') [1]
         await message.channel.purge(limit=int(amount))
         clearembed = discord.Embed(title = 'Nachrichten gelöscht...', description = f'Es wurden {str(amount)} Nachrichten in {str(message.channel.mention)} von {str(message.author.mention)} gelöscht.')
-        await message.channel.send(embed = clearembed)
+        await logging.send(embed = clearembed)
     
 #mute
     if message.content.startswith('!mute') and modrolle in message.author.roles and not message.content.startswith('!mute eng'):
