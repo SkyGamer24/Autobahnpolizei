@@ -272,15 +272,11 @@ async def on_message(message):
 
             skygamer = guild.get_member(605731050823614504)
             dmmer = guild.get_member(dmautor)
-            warnungenembeded = discord.Embed(title = 'Mute', description = f'Der User {str(mention)}> wurde verwarnt und gemutet.', colour = 0x151515)
-            warnungenembeded.add_field(name = "Grund: ", value = f"{str(reason)}", inline=True)
-            warnungenembeded.add_field(name = "Moderator: ", value = f"{message.author.mention} \n", inline=True)
-            warnungenembeded.set_footer(text = '\n' + uhrzeit)
+
             dmembed = discord.Embed(title = "Attention!", description = f'You have been muted for 24 hours by the server moderator.  \nReason: {str(reason)} \n \nIf you have any questions about this measure, please contact {str(skygamer.mention)}', colour = 0x151515)
             await dmmer.send(embed = dmembed)
             print ('ja lul ey')
 
-            await logging.send(embed = warnungenembeded)
             await message.channel.send ('Bitte wiederholen sie den Grund auf deutsch:')
             author = message.author.id
             print ('feucht und fettig')
@@ -326,6 +322,14 @@ async def on_message(message):
             with open(("reason.json"), "w") as reason_file:
                 reason_file.write(json.dumps(reasons))
 
+
+            guild = message.guild
+            mention = guild.get_member(author)
+            warnungenembeded = discord.Embed(title = 'Mute', description = f'Der User {str(mention.mention)}> wurde verwarnt und gemutet.', colour = 0x151515)
+            warnungenembeded.add_field(name = "Grund: ", value = f"{str(reason)}", inline=True)
+            warnungenembeded.add_field(name = "Moderator: ", value = f"{message.author.mention} \n", inline=True)
+            warnungenembeded.set_footer(text = '\n' + uhrzeit)
+            await logging.send(embed=warnungenembeded)
 
     if message.content.startswith('!warn eng') and modrolle in message.author.roles:
         try:
@@ -377,10 +381,6 @@ async def on_message(message):
 
             skygamer = guild.get_member(605731050823614504)
             dmmer = guild.get_member(dmautor)
-            warnungenembeded = discord.Embed(title = 'Warn', description = f'Der User {str(mention)}> wurde verwarnt.', colour = 0x151515)
-            warnungenembeded.add_field(name = "Grund: ", value = f"{str(reason)}", inline=True)
-            warnungenembeded.add_field(name = "Moderator: ", value = f"{message.author.mention} \n", inline=True)
-            warnungenembeded.set_footer(text = '\n' + uhrzeit)
             dmembed = discord.Embed(title = "Attention!", description = f'You have been warned by the server moderator.  \nReason: {str(reason)} \n \nIf you have any questions about this measure, please contact {str(skygamer.mention)}', colour = 0x151515)
             await dmmer.send(embed = dmembed)
             print ('ja lul ey')
@@ -425,6 +425,15 @@ async def on_message(message):
             with open(("reason.json"), "w") as reason_file:
                 reason_file.write(json.dumps(reasons))
 
+
+            guild = message.guild
+            mention = guild.get_member(author)
+            warnungenembeded = discord.Embed(title = 'Warn', description = f'Der User {str(mention.mention)}> wurde verwarnt.', colour = 0x151515)
+            warnungenembeded.add_field(name = "Grund: ", value = f"{str(reason)}", inline=True)
+            warnungenembeded.add_field(name = "Moderator: ", value = f"{message.author.mention} \n", inline=True)
+            warnungenembeded.set_footer(text = '\n' + uhrzeit)
+            
+            await logging.send(embed=warnungenembeded)
 #CLEAR WARNINGS CMMD
 
     if message.content.startswith('!clear warns') and modrolle in message.author.roles:
