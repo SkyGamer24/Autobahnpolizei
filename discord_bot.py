@@ -581,41 +581,31 @@ async def on_message(message):
             
             
     if message.content.startswith('!dm') and modrolle in message.author.roles:
-        
-
         try:
-            mention = message.content.split(' ')[1]
+            userid = message.content.split(' ')[1]
+            member = message.guild.get_member(int(userid))
+        except:
+            try:
+                userid = message.content.replace('<@!>','')
+                member = message.guild.get_member(int(userid))
+            except:
+                
+                await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
+                return
+            
+        try:
+            reason = message.content.split(' ')[2]
         except:
             await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
             return
-        tester = False
-        try:
-            reason = message.content.split('> ') [1]
-            tester = True
-        except:
-            await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
-        if tester:
-            mention = message.content.split(' ')[1]
-            try:
-                mention = mention.split('> ') [0]
-                mention = mention.replace('!', '')
-                autor1 = mention.replace('<', '')
-                autor2 = autor1.replace('>', '')
-                autor3 = autor2.replace('!', '')
-                autor4 = autor3.replace('@', '')
-                author_id = int(autor4)
-                
-            except:
-                await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
-    
-                return
-                
-            member = guild.get_member(author_id)
             
-            dmnachricht = discord.Embed(description=reason, colour=0x23DF0F)
-            await member.send(embed = dmnachricht)
-            unmutembed = discord.Embed(description=f'Dem User <@{author_id}> wurde erfolgreich eine DM geschickt.', colur = 0x6E6E6E)
-            await message.channel.send(embed=unmutembed)
+        dmnachricht = discord.Embed(description=reason, colour=0x23DF0F)
+        await member.send(embed = dmnachricht)
+        dmembed = discord.Embed(description=f'Dem User {member.mention} wurde erfolgreich eine DM geschickt.', colur = 0x6E6E6E)
+        await message.channel.send(embed=dmembed)
+
+            
+        
 
 
 @client.event
