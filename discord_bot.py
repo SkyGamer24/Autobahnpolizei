@@ -583,19 +583,24 @@ async def on_message(message):
     if message.content.startswith('!dm') and modrolle in message.author.roles:
         try:
             userid = message.content.split(' ')[1]
+            userid = userid.replace(' ','')
             member = message.guild.get_member(int(userid))
         except:
             try:
-                userid = message.content.replace('<@!>','')
+                content = message.content.split(' ')[1]
+                userid = content.replace('<@!','')
+                userid = userid.replace('>','')
+                userid = userid.replace(' ','')
                 member = message.guild.get_member(int(userid))
             except:
-                
+                print('looo')
                 await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
                 return
             
         try:
             reason = message.content.split(' ')[2]
         except:
+
             await message.channel.send('Um einem User eine DM zu schreiben musst du !dm [user] [nachricht] schreiben.')
             return
             
@@ -603,7 +608,6 @@ async def on_message(message):
         await member.send(embed = dmnachricht)
         dmembed = discord.Embed(description=f'Dem User {member.mention} wurde erfolgreich eine DM geschickt.', colur = 0x6E6E6E)
         await message.channel.send(embed=dmembed)
-
             
         
 
