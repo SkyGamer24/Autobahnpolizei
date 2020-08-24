@@ -53,6 +53,30 @@ Farbe12 = 0xFDF367
 @client.event
 async def on_ready():
     print ('logged in')
+    guild = client.get_guild(716611712530513981)
+    rolle = guild.get_role(747406748964356108)
+
+    with open('mutedzeit.json') as zeit_file:
+        zeitjson = json.load(zeit_file)
+    while True:
+        zeit = time.time()
+        zeit = str(zeit).split('.')[0]
+        with open('mutedzeit.json') as zeit_file:
+            zeitjson = json.load(zeit_file)
+        for i in zeitjson:
+            with open('mutedzeit.json') as zeit_file:
+                zeitjson = json.load(zeit_file)
+            if int(zeit) - int(zeitjson[str(i)]) >= 86400:
+                try:
+                    member = guild.get_member(int(i))
+                    await member.remove_roles(rolle)
+                    del zeitjson[str(i)]
+                    with open("mutedzeit.json", "w") as zeit_file:
+                        json.dump(zeitjson, zeit_file, indent=4)
+                except:
+                    print('lol')
+                    
+        await asyncio.sleep(300)
 
 
 @client.event
@@ -143,9 +167,21 @@ async def on_message(message):
 
             muted = discord.Embed(title = "Achtung!", description = f"Du wurdest von der Server-Moderation für 24 Stunden gemutet. \nGrund: {str(reason)} \n \nBei Fragen zu dieser Maßnahme wende dich bitte an {str(skygamer.mention)}", colour = 0x151515)
             await member.send(embed = muted)
-            time = 86400
-            await asyncio.sleep(time)
+     
+
+            
+            
+            zeit = time.time()
+            zeit = str(zeit).split('.')[0]
+            print(zeit)
+
+            zeitjson[str(member.id)] = str(zeit)
+            with open("mutedzeit.json", "w") as zeit_file:
+                json.dump(zeitjson, zeit_file, indent=4)
+                
+            await asyncio.sleep(86400)
             await member.remove_roles(mutedrole)
+          
 
 #warn
     if message.content.startswith('!warn') and modrolle in message.author.roles and not message.content.startswith('!warn eng'):
@@ -290,6 +326,15 @@ async def on_message(message):
             with open(("muteeng.json"), "w") as mute_file:
                 mute_file.write(json.dumps(mutegrund))
             await dmmer.add_roles(mutedrole)
+            zeit = time.time()
+            zeit = str(zeit).split('.')[0]
+            print(zeit)
+
+            zeitjson[str(member.id)] = str(zeit)
+            
+            with open("mutedzeit.json", "w") as zeit_file:
+                json.dump(zeitjson, zeit_file, indent=4)
+                
             time = 86400
             await asyncio.sleep(time)
             await member.remove_roles(mutedrole)
